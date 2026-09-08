@@ -6,11 +6,11 @@
 const env = import.meta.env as Record<string, string | undefined>;
 
 export const appConfig = {
-  apiBaseUrl: env["VITE_API_BASE_URL"] ?? "",
+  apiBaseUrl: env["VITE_API_BASE_URL"] || "https://confmangsys.onrender.com",
   conferenceShortName: env["VITE_CONFERENCE_SHORT_NAME"] ?? "WCCAUP2027",
   /** Mock mode is the default so the UI can be developed without the backend. */
   useMockData: (env["VITE_USE_MOCK_DATA"] ?? "true") !== "false",
-  siteUrl: env["VITE_SITE_URL"] ?? "https://WCCAUP2027.org",
+  siteUrl: env["VITE_SITE_URL"] ?? "https://wccaup-2027-dup.vercel.app",
 };
 
 export const brand = {
