@@ -11,6 +11,8 @@ export const appConfig = {
   /** Mock mode is the default so the UI can be developed without the backend. */
   useMockData: (env["VITE_USE_MOCK_DATA"] ?? "true") !== "false",
   siteUrl: env["VITE_SITE_URL"] ?? "https://wccaup-2027-dup.vercel.app",
+  /** Public Razorpay API key identifier for online client-side checkout. */
+  razorpayKeyId: env["VITE_RAZORPAY_KEY_ID"] || "rzp_test_TaJstYd6vsQoTu",
 };
 
 export const brand = {

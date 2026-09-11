@@ -25,16 +25,21 @@ export const registrationService = {
       designation: payload.designation || "",
       country: payload.country || "",
       registrationType: payload.registrationCategory,
-      amount: 0,
-      currency: "USD",
+      amount: payload.amount ?? 10,
+      currency: payload.currency ?? "INR",
+      paymentStatus: payload.paymentStatus ?? "PENDING",
+      paymentReference: payload.paymentReference || undefined,
     };
     return postResource<any, RegistrationResponse>(
       endpoints.registrations(appConfig.conferenceShortName),
       backendPayload,
       (data) => ({
-        registrationNumber: "DEMO-REG-0000",
+        registrationNumber: `REG-${Date.now().toString().slice(-6)}`,
         email: data.email,
-        paymentStatus: "PENDING",
+        paymentStatus: payload.paymentStatus ?? "PENDING",
+        paymentReference: payload.paymentReference,
+        amount: payload.amount ?? 10,
+        currency: payload.currency ?? "INR",
       }),
     );
   },
