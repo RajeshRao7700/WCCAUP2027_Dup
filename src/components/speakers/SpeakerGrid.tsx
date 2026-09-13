@@ -5,6 +5,7 @@ import { EmptyState } from "@/components/common/States";
 
 const filters: { value: "ALL" | SpeakerCategory; label: string }[] = [
   { value: "ALL", label: "All" },
+  { value: "SIGNED_UP", label: "Signed Up" },
   { value: "PLENARY", label: "Plenary" },
   { value: "KEYNOTE", label: "Keynote" },
   { value: "INVITED", label: "Invited" },

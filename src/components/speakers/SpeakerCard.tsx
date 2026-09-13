@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type { Speaker } from "@/types/conference";
 import { initialsOf, speakerCategoryLabels } from "@/lib/format";
 
 export function SpeakerCard({ speaker }: { speaker: Speaker }) {
+  const [imgError, setImgError] = useState(false);
   const fullName = `${speaker.firstName} ${speaker.lastName}`;
+  const showPhoto = Boolean(speaker.photoUrl && !imgError);
+
   return (
     <li className="card-lift overflow-hidden rounded-xl border border-border bg-card">
       <Link
@@ -13,11 +17,12 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
         aria-label={`View profile of ${fullName}`}
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
-          {speaker.photoUrl ? (
+          {showPhoto ? (
             <img
               src={speaker.photoUrl}
               alt={`Portrait of ${fullName}`}
               loading="lazy"
+              onError={() => setImgError(true)}
               className="h-full w-full object-cover"
             />
           ) : (

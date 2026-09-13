@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Share2 } from "lucide-react";
 import { Layout } from "@/components/common/Layout";
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/speakers/$id")({
 function SpeakerDetailPage() {
   const { id } = Route.useParams();
   const { data: speaker, isLoading, error } = useSpeaker(id);
+  const [imgError, setImgError] = useState(false);
 
   const share = async () => {
     if (typeof navigator !== "undefined" && navigator.share) {
@@ -31,6 +33,8 @@ function SpeakerDetailPage() {
       await navigator.clipboard?.writeText(window.location.href).catch(() => undefined);
     }
   };
+
+  const showPhoto = Boolean(speaker?.photoUrl && !imgError);
 
   return (
     <Layout>
@@ -53,10 +57,11 @@ function SpeakerDetailPage() {
           {speaker ? (
             <article className="grid gap-12 lg:grid-cols-[380px_1fr]">
               <div className="overflow-hidden rounded-xl border border-border">
-                {speaker.photoUrl ? (
+                {showPhoto ? (
                   <img
                     src={speaker.photoUrl}
                     alt={`Portrait of ${speaker.firstName} ${speaker.lastName}`}
+                    onError={() => setImgError(true)}
                     className="aspect-[3/4] w-full object-cover"
                   />
                 ) : (

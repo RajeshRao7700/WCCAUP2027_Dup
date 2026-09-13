@@ -57,20 +57,20 @@ export function SponsorGrid() {
 
   return (
     <Section tone="light" id="sponsors">
-      <QueryBoundary
-        query={query}
-        loadingLabel="Loading sponsors…"
-        isEmpty={(items) => items.length === 0}
-        hideWhenEmpty
-      >
-        {(sponsors) => (
-          <>
-            <SectionHeader
-              eyebrow="Supporters"
-              title="Sponsors"
-              description="WCCAUP2027 is supported by organisations investing in the future of intelligent systems."
-            />
-            <div className="mt-14 space-y-10">
+      <SectionHeader
+        eyebrow="Supporters"
+        title="Sponsors & Partners"
+        description="WCCAUP2027 is supported by organisations investing in the future of intelligent systems."
+      />
+      <div className="mt-14">
+        <QueryBoundary
+          query={query}
+          loadingLabel="Loading sponsors…"
+          emptyMessage="Sponsorship opportunities are currently open. Contact the conference secretariat to partner with WCCAUP2027."
+          isEmpty={(items) => items.length === 0}
+        >
+          {(sponsors) => (
+            <div className="space-y-10">
               {tierOrder.map((tier) => {
                 const group = sponsors.filter((sponsor) => sponsor.sponsorshipLevel === tier);
                 if (group.length === 0) return null;
@@ -86,9 +86,9 @@ export function SponsorGrid() {
                 );
               })}
             </div>
-          </>
-        )}
-      </QueryBoundary>
+          )}
+        </QueryBoundary>
+      </div>
     </Section>
   );
 }
