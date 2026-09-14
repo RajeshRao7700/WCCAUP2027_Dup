@@ -6,13 +6,21 @@
 const env = import.meta.env as Record<string, string | undefined>;
 
 export const appConfig = {
-  apiBaseUrl: env["VITE_API_BASE_URL"] || "https://confmangsys.onrender.com",
-  conferenceShortName: env["VITE_CONFERENCE_SHORT_NAME"] ?? "WCCAUP2027",
-  /** Mock mode is the default so the UI can be developed without the backend. */
-  useMockData: (env["VITE_USE_MOCK_DATA"] ?? "true") !== "false",
-  siteUrl: env["VITE_SITE_URL"] ?? "https://wccaup-2027-dup.vercel.app",
+  apiBaseUrl:
+    (env["VITE_API_BASE_URL"] && env["VITE_API_BASE_URL"].trim()) ||
+    "https://confmangsys.onrender.com",
+  conferenceShortName:
+    (env["VITE_CONFERENCE_SHORT_NAME"] && env["VITE_CONFERENCE_SHORT_NAME"].trim()) ||
+    "WCCAUP2027",
+  /** Mock mode is only active if explicitly set to 'true'. Default in production is false. */
+  useMockData: env["VITE_USE_MOCK_DATA"] === "true",
+  siteUrl:
+    (env["VITE_SITE_URL"] && env["VITE_SITE_URL"].trim()) ||
+    "https://wccaup-2027-dup.vercel.app",
   /** Public Razorpay API key identifier for online client-side checkout. */
-  razorpayKeyId: env["VITE_RAZORPAY_KEY_ID"] || "rzp_test_TaJstYd6vsQoTu",
+  razorpayKeyId:
+    (env["VITE_RAZORPAY_KEY_ID"] && env["VITE_RAZORPAY_KEY_ID"].trim()) ||
+    "rzp_test_TaJstYd6vsQoTu",
 };
 
 export const brand = {
